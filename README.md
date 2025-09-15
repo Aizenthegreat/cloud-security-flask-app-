@@ -3,7 +3,7 @@
 (AI was used in assistance with troubleshooting the scripts and code) 
 
 Overview
-A guide to building a Dockerized Flask application and scanning it for vulnerabilities. This project demonstrates container creation  and security scanning.
+A guide to building a Dockerized Flask application and scanning it for vulnerabilities. This project demonstrates container creation  and security scanning and hardening.
 
 Table of Contents:
 
