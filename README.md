@@ -17,12 +17,12 @@ Security Verification
 1. PROJECT SET UP
    
 -  step 1: Create Project Structure
-   mkdir secure-docker-app
-   cd secure-docker-app
+   [ mkdir secure-docker-app
+   cd secure-docker-app ]
 ------------------------------------------------------------------------
 - step 2: Create Flask App
   
-  from flask import Flask, jsonify
+[from flask import Flask, jsonify
 import os
 import datetime
 
@@ -51,15 +51,15 @@ def info():
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=False) ]
     --------------------------------------------------------------------------
 - Step 3: Create Requirements File
-  Flask==2.3.3
-  Werkzeug==2.3.7
+   [Flask==2.3.3
+  Werkzeug==2.3.7]
 --------------------------------------------------------------------------
 - step 4: Create secure Dockerfile
   
-FROM python:3.9-slim-bullseye
+[ FROM python:3.9-slim-bullseye
 
 # Security environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -90,15 +90,14 @@ USER appuser
 EXPOSE 5000
 
 # Health check for container monitoring
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:5000/health || exit 1
+[ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 , 
+CMD curl -f http://localhost:5000/health || exit 1 ]
 
-CMD ["python", "app.py"]
 
 ------------------------------------------------------------------------------------------
 - step 5: Create .dockerignore
   
-  # Exclude sensitive and unnecessary files
+  [ # Exclude sensitive and unnecessary files
 __pycache__/
 *.py[cod]
 .env
@@ -121,11 +120,11 @@ services:
       - FLASK_DEBUG=False
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      test: curl http://localhost:5000/health
       interval: 30s
       timeout: 10s
       retries: 3
-  
+  ]
 ----------------------------------------------------------------------------------------------------------------
 SECURITY SCANNING
 
@@ -136,8 +135,8 @@ it shoud look something like this
 <img width="958" height="997" alt="image" src="https://github.com/user-attachments/assets/7f9ee922-04c4-4e77-913b-adb4f41c3f83" />
 -------------------------------------------------------------------------------------------------------------------------------------
 
-  docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
-  aquasec/trivy:latest image secure-flask-app --severity HIGH,CRITICAL (VULNERABILITY SCAN)
+  [ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+  aquasec/trivy:latest image secure-flask-app --severity HIGH,CRITICAL] (VULNERABILITY SCAN)
 
   your out put should be something like this but alot longer
 
@@ -204,7 +203,7 @@ Total: 150 (UNKNOWN: 1, LOW: 99, MEDIUM: 31, HIGH: 14, CRITICAL: 5)
 ---------------------------------------------------------------------------------------------------------------
 - step 2: create security check script
   
-  @echo off
+ [ @echo off
 echo === DOCKER SECURITY HARDENING VERIFICATION ===
 
 echo [1] Verifying non-root user execution...
@@ -222,9 +221,12 @@ docker exec flask-app ps aux
 
 echo === SECURITY VERIFICATION COMPLETE ===
 pause
+
+]
+
 -------------------------------------------------------------------------------------------------------------------------
 - step 3: do security checks by checking the health of the application
-  curl http://localhost:5000/health
+  [curl http://localhost:5000/health]
 
   --------------------------------------------------------------------------------------------------------------------------------
   
